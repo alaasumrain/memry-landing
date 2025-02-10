@@ -22,10 +22,10 @@ export default function Home() {
             Enable your AI agents to remember context, learn from interactions, and deliver personalized experiences at scale.
           </p>
           <div className="flex flex-col md:flex-row gap-4 justify-center">
-            <GradientButton href="/docs" size="lg">
+            <GradientButton href="/docs">
               Get Started
             </GradientButton>
-            <GradientButton href="/demo" variant="outline" size="lg">
+            <GradientButton href="/demo" variant="outline">
               Try Demo
             </GradientButton>
           </div>
@@ -175,7 +175,7 @@ const memories = await memry.retrieve({
           <p className="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
             Join the growing number of companies using Memry to build smarter AI applications.
           </p>
-          <GradientButton href="/signup" size="lg">
+          <GradientButton href="/signup">
             Start Building
           </GradientButton>
         </div>
