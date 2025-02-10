@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google";
-import { Fira_Code as FontMono } from "next/font/google";
+import { Inter } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
 import { Navbar } from "@/components/layout/navbar";
 import "./globals.css";
 
-const fontSans = FontSans({
+const fontSans = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
+  display: 'swap',
 });
 
-const fontMono = FontMono({
+const fontMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
