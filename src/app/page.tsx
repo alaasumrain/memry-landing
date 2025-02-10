@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { ErrorBoundary } from '@/components/error-boundary';
 import { Hero } from '@/components/hero/hero-scene';
 import { CodeBlock } from '@/components/code/code-block';
 import { FeatureCard } from '@/components/features/feature-card';
@@ -11,7 +14,9 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center bg-gradient-to-b from-black to-gray-900">
         <div className="absolute inset-0">
-          <Hero />
+          <ErrorBoundary>
+            <Hero />
+          </ErrorBoundary>
         </div>
         <div className="relative z-10 text-center px-6">
           <h1 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600 mb-6">
