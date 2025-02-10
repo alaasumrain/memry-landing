@@ -1,9 +1,5 @@
 {
   "version": 2,
-  "buildEnvironment": {
-    "ENABLE_TURBOPACK": "true",
-    "NODE_VERSION": "20.x"
-  },
   "buildCommand": "npm run build",
   "devCommand": "npm run dev",
   "installCommand": "npm install --legacy-peer-deps",
@@ -15,6 +11,7 @@
     }
   ],
   "env": {
-    "NEXT_PUBLIC_API_URL": "https://api.memry.dev"
+    "NEXT_PUBLIC_API_URL": "https://api.memry.dev",
+    "NODE_VERSION": "20.x"
   }
 }
