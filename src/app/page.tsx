@@ -1,21 +1,8 @@
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
+import { DynamicHero, DynamicCodeBlock, DynamicErrorBoundary } from '@/components/client-wrapper';
 import { FeatureCard } from '@/components/features/feature-card';
 import { PricingTable } from '@/components/pricing/pricing-table';
 import { GradientButton } from '@/components/ui/gradient-button';
-
-// Dynamically import client components with no SSR
-const Hero = dynamic(() => import('@/components/hero/hero-scene').then(mod => mod.Hero), {
-  ssr: false
-});
-
-const CodeBlock = dynamic(() => import('@/components/code/code-block').then(mod => mod.CodeBlock), {
-  ssr: false
-});
-
-const ErrorBoundary = dynamic(() => import('@/components/error-boundary').then(mod => mod.ErrorBoundary), {
-  ssr: false
-});
 
 export default function Home() {
   return (
@@ -23,9 +10,9 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center bg-gradient-to-b from-black to-gray-900">
         <div className="absolute inset-0">
-          <ErrorBoundary>
-            <Hero />
-          </ErrorBoundary>
+          <DynamicErrorBoundary>
+            <DynamicHero />
+          </DynamicErrorBoundary>
         </div>
         <div className="relative z-10 text-center px-6">
           <h1 className="text-5xl md:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-600 mb-6">
@@ -62,7 +49,7 @@ export default function Home() {
                 </Link>
               </div>
             </div>
-            <CodeBlock
+            <DynamicCodeBlock
               language="typescript"
               code={`import { MemryClient } from '@memry/sdk';
 
