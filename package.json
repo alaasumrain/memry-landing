@@ -21,7 +21,9 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwind-merge": "^2.2.0",
-    "three": "^0.160.0"
+    "three": "^0.160.0",
+    "preact": "^10.19.3",
+    "preact-compat": "^3.19.0"
   },
   "devDependencies": {
     "@types/node": "^20.10.6",
