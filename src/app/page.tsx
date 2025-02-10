@@ -1,12 +1,21 @@
-'use client';
-
 import Link from 'next/link';
-import { ErrorBoundary } from '@/components/error-boundary';
-import { Hero } from '@/components/hero/hero-scene';
-import { CodeBlock } from '@/components/code/code-block';
+import dynamic from 'next/dynamic';
 import { FeatureCard } from '@/components/features/feature-card';
 import { PricingTable } from '@/components/pricing/pricing-table';
 import { GradientButton } from '@/components/ui/gradient-button';
+
+// Dynamically import client components with no SSR
+const Hero = dynamic(() => import('@/components/hero/hero-scene').then(mod => mod.Hero), {
+  ssr: false
+});
+
+const CodeBlock = dynamic(() => import('@/components/code/code-block').then(mod => mod.CodeBlock), {
+  ssr: false
+});
+
+const ErrorBoundary = dynamic(() => import('@/components/error-boundary').then(mod => mod.ErrorBoundary), {
+  ssr: false
+});
 
 export default function Home() {
   return (

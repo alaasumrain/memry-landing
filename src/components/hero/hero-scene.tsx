@@ -5,14 +5,11 @@ import * as THREE from 'three';
 
 export function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isClient, setIsClient] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  useEffect(() => {
-    if (!isClient || !containerRef.current) return;
+    if (!containerRef.current) return;
 
     let animationFrameId: number;
     let scene: THREE.Scene;
@@ -99,6 +96,7 @@ export function Hero() {
 
       // Start animation
       animate();
+      setIsLoading(false);
 
       // Cleanup
       return () => {
@@ -116,9 +114,32 @@ export function Hero() {
       };
     } catch (error) {
       console.error('Error initializing Three.js:', error);
+      setError(error instanceof Error ? error.message : 'Failed to initialize 3D scene');
+      setIsLoading(false);
       return () => {};
     }
-  }, [isClient]);
+  }, []);
+
+  if (error) {
+    return (
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="text-center text-gray-400">
+          <p>Unable to load 3D scene</p>
+          <p className="text-sm mt-2">{error}</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="animate-pulse">
+          <div className="w-32 h-32 bg-blue-500/20 rounded-full" />
+        </div>
+      </div>
+    );
+  }
 
   return <div ref={containerRef} className="absolute inset-0" />;
 }
