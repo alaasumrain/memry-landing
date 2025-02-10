@@ -1,4 +1,6 @@
-import { GradientButton } from '../ui/gradient-button';
+'use client';
+
+import { GradientButton } from '@/components/ui/gradient-button';
 
 const tiers = [
   {

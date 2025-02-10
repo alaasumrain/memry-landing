@@ -1,77 +1,103 @@
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { Github } from 'lucide-react';
+'use client';
 
-const Navbar = () => {
-  const navItems = [
-    { name: 'Dashboard', href: '/dashboard' },
-    { name: 'Documentation', href: '/docs' },
-    { name: 'Pricing', href: '/pricing' },
-  ];
+import Link from 'next/link';
+import { useState } from 'react';
+import type { Route } from '@/app/types/routes';
+
+const navigation = [
+  { name: 'Documentation', href: '/docs' as Route },
+  { name: 'Demo', href: '/demo' as Route },
+  { name: 'Contact', href: '/contact' as Route },
+];
+
+export function Navbar() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <motion.header
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="fixed top-0 left-0 right-0 z-50"
-    >
-      <nav className="glassmorphism mx-auto px-6 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <motion.div
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span className="text-2xl font-bold gradient-text">Memry</span>
-            </motion.div>
-          </Link>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-lg border-b border-gray-800">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <div className="flex-shrink-0">
+            <Link href="/" className="text-xl font-bold text-white">
+              Memry
+            </Link>
+          </div>
 
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <motion.div
-                key={item.name}
-                whileHover={{ y: -2 }}
-                whileTap={{ y: 0 }}
-              >
+          {/* Desktop Navigation */}
+          <div className="hidden md:block">
+            <div className="ml-10 flex items-baseline space-x-8">
+              {navigation.map((item) => (
                 <Link
+                  key={item.name}
                   href={item.href}
                   className="text-sm text-gray-300 hover:text-white transition-colors"
                 >
                   {item.name}
                 </Link>
-              </motion.div>
-            ))}
+              ))}
+            </div>
           </div>
 
-          <div className="flex items-center space-x-4">
-            <motion.a
-              href="https://github.com/alaasumrain/memry"
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-              className="p-2 rounded-full hover:bg-gray-800 transition-colors"
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <button
+              type="button"
+              className="text-gray-400 hover:text-white"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
-              <Github className="w-5 h-5" />
-            </motion.a>
-            
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Link
-                href="/login"
-                className="px-4 py-2 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors"
-              >
-                Get Started
-              </Link>
-            </motion.div>
+              <span className="sr-only">Open main menu</span>
+              {!isMobileMenuOpen ? (
+                <svg
+                  className="block h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                  />
+                </svg>
+              ) : (
+                <svg
+                  className="block h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              )}
+            </button>
           </div>
         </div>
-      </nav>
-    </motion.header>
-  );
-};
+      </div>
 
-export default Navbar;
+      {/* Mobile menu */}
+      {isMobileMenuOpen && (
+        <div className="md:hidden">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-900">
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white hover:bg-gray-800 rounded-md"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+    </nav>
+  );
+}

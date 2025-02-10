@@ -2,18 +2,6 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  experimental: {
-    turbo: {
-      rules: {
-        // Enable optimizations
-        optimizePackageImports: ['@react-three/drei', '@react-three/fiber', 'three', 'framer-motion'],
-      },
-    },
-    // Enable modern features
-    serverActions: true,
-    typedRoutes: true,
-    serverComponentsExternalPackages: [],
-  },
   images: {
     domains: ['memry.dev'],
   },
